@@ -1,0 +1,269 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+.yarn/install-state.gz
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Testing
+coverage/
+.nyc_output/
+test-results/
+__snapshots__/
+*.test.*
+*.spec.*
+
+# Next.js
+.next/
+out/
+.next/cache/
+.next/standalone/
+.next/server/
+.next/static/
+.next/trace
+.next/build-manifest.json
+.next/react-loadable-manifest.json
+
+# Production
+build/
+dist/
+.next-build-id
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Vercel
+.vercel
+.vercel/output/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Supabase local
+.supabase/
+supabase/functions/dist/
+
+# Clerk local development
+.clerk/
+
+# WIP Files
+99error.txt
+99next-task.txt
+
+# System files
+*.sys
+*.dmp
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Cache directories
+.cache/
+.turbo/
+
+# Bun
+.bun/
+
+# pnpm
+node_modules/.pnpm/
+node_modules/.modules.yaml
+node_modules/.cache/
+
+# macOS
+._*
+
+# Windows
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# Temporary project files
+*.todo
+*.wip
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Image files (generated/compressed)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.ico
+
+# Font files
+*.woff
+*.woff2
+*.ttf
+*.eot
+*.otf
+
+# Audio/Video files
+*.mp3
+*.mp4
+*.wav
+*.avi
+*.mov
+
+# Archive files
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+
+# Documentation
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+
+# Security
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+
+# Performance monitoring
+*.cpuprofile
+*.heapsnapshot
+
+#out
+.agents/
+.claude/
+clerk-supabase-brief.md
+skills-lock.json
