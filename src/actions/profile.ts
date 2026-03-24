@@ -174,8 +174,8 @@ export async function updateProfileForUser(clerkUserId: string, updates: {
       .update({
         ...updates,
         updated_at: new Date().toISOString(),
-      } as any)
-      .eq('clerk_user_id' as any, clerkUserId as any)
+      })
+      .eq('clerk_user_id', clerkUserId)
       .select()
       .single();
 

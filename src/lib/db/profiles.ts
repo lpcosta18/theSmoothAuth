@@ -18,7 +18,7 @@ export async function getProfile(): Promise<Profile> {
   const { data: profile, error } = await supabase
     .from('profiles')
     .select('*')
-    .eq('clerk_user_id' as any, userId as any)
+    .eq('clerk_user_id', userId)
     .single();
 
   if (error) {
@@ -75,8 +75,8 @@ export async function updateProfile(updates: ProfileUpdate): Promise<Profile> {
     .update({
       ...updates,
       updated_at: new Date().toISOString(),
-    } as any)
-    .eq('clerk_user_id' as any, userId as any)
+    })
+    .eq('clerk_user_id', userId)
     .select()
     .single();
 
@@ -101,7 +101,7 @@ export async function profileExists(): Promise<boolean> {
   const { data, error } = await supabase
     .from('profiles')
     .select('id')
-    .eq('clerk_user_id' as any, userId as any)
+    .eq('clerk_user_id', userId)
     .single();
 
   if (error) {
@@ -151,7 +151,7 @@ export async function getProfileById(profileId: string): Promise<Profile> {
   const { data: profile, error } = await supabase
     .from('profiles')
     .select('*')
-    .eq('id' as any, profileId as any)
+    .eq('id', profileId)
     .single();
 
   if (error) {
@@ -181,7 +181,7 @@ export async function deleteProfile(profileId: string): Promise<void> {
   const { error } = await supabase
     .from('profiles')
     .delete()
-    .eq('id' as any, profileId as any);
+    .eq('id', profileId);
 
   if (error) {
     throw new Error(`Erro ao eliminar perfil: ${error.message}`);
@@ -229,8 +229,8 @@ export async function updateProfileRole(profileId: string, role: 'basic' | 'admi
     .update({
       role,
       updated_at: new Date().toISOString(),
-    } as any)
-    .eq('id' as any, profileId as any)
+    })
+    .eq('id', profileId)
     .select()
     .single();
 
@@ -275,7 +275,7 @@ export async function getProfileStats(): Promise<{
     throw new Error(`Erro ao contar por role: ${roleError.message}`);
   }
 
-  const byRole = roleCounts?.reduce((acc, profile) => {
+  const byRole = (roleCounts as Array<{ role: string }> | null)?.reduce((acc, profile) => {
     acc[profile.role] = (acc[profile.role] || 0) + 1;
     return acc;
   }, {} as Record<string, number>) || {};

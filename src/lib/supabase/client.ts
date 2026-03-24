@@ -59,12 +59,16 @@ if (!supabaseAnonKey) {
   throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY não está definido nas variáveis de ambiente');
 }
 
+// TypeScript knows these are strings after the checks above
+const supabaseUrlString = supabaseUrl as string;
+const supabaseAnonKeyString = supabaseAnonKey as string;
+
 /**
  * Cria e retorna uma instância do cliente Supabase
  * Configurado com boas práticas para aplicações Next.js
  */
 export function createClient() {
-  return createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey, {
+  return createSupabaseClient(supabaseUrlString, supabaseAnonKeyString, {
     auth: {
       // Não usar persistência de sessão - Clerk gere a autenticação
       persistSession: false,

@@ -19,7 +19,7 @@ export async function getCurrentUserWithProfile() {
     const { data: profile, error } = await supabase
       .from('profiles')
       .select('*')
-      .eq('clerk_user_id' as any, user.id as any)
+      .eq('clerk_user_id', user.id)
       .single();
 
     if (error && error.code !== 'PGRST116') {
@@ -61,7 +61,7 @@ export async function getCurrentUserProfile() {
   const { data: profile, error } = await supabase
     .from('profiles')
     .select('*')
-    .eq('clerk_user_id' as any, userId as any)
+    .eq('clerk_user_id', userId)
     .single();
 
   if (error) {
@@ -119,7 +119,7 @@ export async function getPublicUserInfo(userId: string) {
     const { data: profile, error } = await supabase
       .from('profiles')
       .select('name, avatar_url, role')
-      .eq('clerk_user_id' as any, userId as any)
+      .eq('clerk_user_id', userId)
       .single();
 
     if (error) {
@@ -153,8 +153,8 @@ export async function updateUserProfile(updates: {
     .update({
       ...updates,
       updated_at: new Date().toISOString(),
-    } as any)
-    .eq('clerk_user_id' as any, userId as any)
+    })
+    .eq('clerk_user_id', userId)
     .select()
     .single();
 
@@ -207,7 +207,7 @@ export async function createAuthContext() {
   const { data: profile } = await supabase
     .from('profiles')
     .select('*')
-    .eq('clerk_user_id' as any, userId as any)
+    .eq('clerk_user_id', userId)
     .single();
 
   return {
