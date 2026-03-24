@@ -19,7 +19,7 @@ export async function getCurrentUserWithProfile() {
     const { data: profile, error } = await supabase
       .from('profiles')
       .select('*')
-      .eq('clerk_user_id', user.id)
+      .eq('clerk_user_id' as any, user.id as any)
       .single();
 
     if (error && error.code !== 'PGRST116') {
@@ -61,7 +61,7 @@ export async function getCurrentUserProfile() {
   const { data: profile, error } = await supabase
     .from('profiles')
     .select('*')
-    .eq('clerk_user_id', userId)
+    .eq('clerk_user_id' as any, userId as any)
     .single();
 
   if (error) {
@@ -73,7 +73,7 @@ export async function getCurrentUserProfile() {
           clerk_user_id: userId,
           name: 'Utilizador',
           role: 'basic',
-        })
+        } as any)
         .select()
         .single();
 
@@ -95,7 +95,7 @@ export async function getCurrentUserProfile() {
 export async function checkUserRole(allowedRoles: string[]) {
   try {
     const profile = await getCurrentUserProfile();
-    return allowedRoles.includes(profile.role);
+    return allowedRoles.includes((profile as any).role);
   } catch (error) {
     console.error('Erro ao verificar role:', error);
     return false;
@@ -119,7 +119,7 @@ export async function getPublicUserInfo(userId: string) {
     const { data: profile, error } = await supabase
       .from('profiles')
       .select('name, avatar_url, role')
-      .eq('clerk_user_id', userId)
+      .eq('clerk_user_id' as any, userId as any)
       .single();
 
     if (error) {
@@ -127,9 +127,9 @@ export async function getPublicUserInfo(userId: string) {
     }
 
     return {
-      name: profile.name,
-      avatarUrl: profile.avatar_url,
-      role: profile.role,
+      name: (profile as any).name,
+      avatarUrl: (profile as any).avatar_url,
+      role: (profile as any).role,
     };
   } catch (error) {
     console.error('Erro ao obter informações públicas:', error);
@@ -153,8 +153,8 @@ export async function updateUserProfile(updates: {
     .update({
       ...updates,
       updated_at: new Date().toISOString(),
-    })
-    .eq('clerk_user_id', userId)
+    } as any)
+    .eq('clerk_user_id' as any, userId as any)
     .select()
     .single();
 
@@ -207,7 +207,7 @@ export async function createAuthContext() {
   const { data: profile } = await supabase
     .from('profiles')
     .select('*')
-    .eq('clerk_user_id', userId)
+    .eq('clerk_user_id' as any, userId as any)
     .single();
 
   return {

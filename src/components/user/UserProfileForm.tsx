@@ -139,8 +139,8 @@ export function UserProfileForm() {
           // Atualizar nome
           if (values.name) {
             await user.update({
-              firstName: values.name?.split(' ')[0] || user.firstName,
-              lastName: values.name?.split(' ').slice(1).join(' ') || user.lastName,
+              firstName: values.name?.split(' ')[0] || user.firstName || '',
+              lastName: values.name?.split(' ').slice(1).join(' ') || user.lastName || '',
             });
           }
 
@@ -256,7 +256,7 @@ export function UserProfileForm() {
             render={({ field }) => (
               <FormItem className="hidden">
                 <FormControl>
-                  <Input type="hidden" {...field} />
+                  <Input type="hidden" {...field} value={field.value || ''} />
                 </FormControl>
               </FormItem>
             )}
@@ -302,6 +302,7 @@ export function UserProfileForm() {
                 <Input
                   placeholder="+351 912 345 678"
                   {...field}
+                  value={field.value || ''}
                   className={form.formState.errors.phone ? 'border-red-500 focus-visible:ring-red-500' : ''}
                 />
               </FormControl>

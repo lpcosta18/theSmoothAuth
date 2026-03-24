@@ -61,18 +61,18 @@ export async function POST(req: Request) {
 
     console.log(`📨 Webhook recebido: ${eventType}`, {
       userId: evt.data.id,
-      email: evt.data.email_addresses?.[0]?.email_address,
     });
 
     switch (eventType) {
       case 'user.created': {
-        const { id, first_name, last_name, image_url, email_addresses } = evt.data;
+        const userData = evt.data as any;
+        const { id, first_name, last_name, image_url, email_addresses } = userData;
 
         // Construir nome completo
         const name = [first_name, last_name].filter(Boolean).join(' ') || 'Novo Utilizador';
 
         // Obter email principal
-        const primaryEmail = email_addresses?.find(email => email.id === evt.data.primary_email_address_id);
+        const primaryEmail = email_addresses?.find((email: any) => email.id === userData.primary_email_address_id);
 
         await createProfileForUser(id, {
           name,
@@ -85,7 +85,8 @@ export async function POST(req: Request) {
       }
 
       case 'user.updated': {
-        const { id, first_name, last_name, image_url } = evt.data;
+        const userData = evt.data as any;
+        const { id, first_name, last_name, image_url } = userData;
 
         // Construir nome completo se disponível
         const updates: any = {};

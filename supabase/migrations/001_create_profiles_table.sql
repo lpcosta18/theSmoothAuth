@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS profiles (
   clerk_user_id TEXT UNIQUE NOT NULL,  -- Reference to Clerk user ID
   name TEXT NOT NULL,
   avatar_url TEXT,
+  email TEXT,
   phone TEXT,
   role TEXT NOT NULL DEFAULT 'basic' CHECK (role IN ('basic', 'admin')),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),

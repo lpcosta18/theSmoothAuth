@@ -51,7 +51,6 @@ export default function RecoverPage() {
             routing="path"
             path="/recover"
             signUpUrl="/sign-up"
-            signInUrl="/sign-in"
           />
 
           <div className="mt-6 pt-6 border-t border-gray-200 text-center space-y-3">

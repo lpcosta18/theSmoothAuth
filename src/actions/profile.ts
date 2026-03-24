@@ -139,9 +139,8 @@ export async function createProfileForUser(clerkUserId: string, userData: {
         name: userData.name,
         avatar_url: userData.avatar_url || null,
         role: 'basic',
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      })
+        email: userData.email || null,
+      } as any)
       .select()
       .single();
 
@@ -149,7 +148,11 @@ export async function createProfileForUser(clerkUserId: string, userData: {
       throw new Error(`Erro ao criar perfil: ${error.message}`);
     }
 
-    return profile;
+    if (!profile) {
+      throw new Error('Perfil não foi criado (retornou null)');
+    }
+
+    return profile as unknown as Profile;
   } catch (error) {
     console.error('Erro ao criar perfil via webhook:', error);
     throw error;
@@ -171,8 +174,8 @@ export async function updateProfileForUser(clerkUserId: string, updates: {
       .update({
         ...updates,
         updated_at: new Date().toISOString(),
-      })
-      .eq('clerk_user_id', clerkUserId)
+      } as any)
+      .eq('clerk_user_id' as any, clerkUserId as any)
       .select()
       .single();
 
@@ -180,7 +183,11 @@ export async function updateProfileForUser(clerkUserId: string, updates: {
       throw new Error(`Erro ao atualizar perfil: ${error.message}`);
     }
 
-    return profile;
+    if (!profile) {
+      throw new Error('Perfil não foi atualizado (retornou null)');
+    }
+
+    return profile as unknown as Profile;
   } catch (error) {
     console.error('Erro ao atualizar perfil via webhook:', error);
     throw error;

@@ -11,6 +11,7 @@ export type Database = {
           clerk_user_id: string;
           name: string;
           avatar_url: string | null;
+          email: string | null;
           phone: string | null;
           role: 'basic' | 'admin';
           created_at: string;
@@ -21,6 +22,7 @@ export type Database = {
           clerk_user_id: string;
           name: string;
           avatar_url?: string | null;
+          email?: string | null;
           phone?: string | null;
           role?: 'basic' | 'admin';
           created_at?: string;
@@ -31,6 +33,7 @@ export type Database = {
           clerk_user_id?: string;
           name?: string;
           avatar_url?: string | null;
+          email?: string | null;
           phone?: string | null;
           role?: 'basic' | 'admin';
           created_at?: string;

@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider localization={ptPT}>
+    <ClerkProvider localization={ptPT as any}>
       <html lang="pt-PT">
         <body className={inter.className}>
           {children}

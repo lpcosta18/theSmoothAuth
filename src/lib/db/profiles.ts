@@ -18,7 +18,7 @@ export async function getProfile(): Promise<Profile> {
   const { data: profile, error } = await supabase
     .from('profiles')
     .select('*')
-    .eq('clerk_user_id', userId)
+    .eq('clerk_user_id' as any, userId as any)
     .single();
 
   if (error) {
@@ -34,7 +34,7 @@ export async function getProfile(): Promise<Profile> {
     throw new Error(`Erro ao obter perfil: ${error.message} (código: ${error.code})`);
   }
 
-  return profile;
+  return profile as unknown as Profile;
 }
 
 /**
@@ -48,7 +48,7 @@ export async function createProfile(profileData: ProfileInsert): Promise<Profile
       ...profileData,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
-    })
+    } as any)
     .select()
     .single();
 
@@ -56,7 +56,7 @@ export async function createProfile(profileData: ProfileInsert): Promise<Profile
     throw new Error(`Erro ao criar perfil: ${error.message}`);
   }
 
-  return profile;
+  return profile as unknown as Profile;
 }
 
 /**
@@ -75,8 +75,8 @@ export async function updateProfile(updates: ProfileUpdate): Promise<Profile> {
     .update({
       ...updates,
       updated_at: new Date().toISOString(),
-    })
-    .eq('clerk_user_id', userId)
+    } as any)
+    .eq('clerk_user_id' as any, userId as any)
     .select()
     .single();
 
@@ -84,7 +84,7 @@ export async function updateProfile(updates: ProfileUpdate): Promise<Profile> {
     throw new Error(`Erro ao atualizar perfil: ${error.message}`);
   }
 
-  return profile;
+  return profile as unknown as Profile;
 }
 
 /**
@@ -101,7 +101,7 @@ export async function profileExists(): Promise<boolean> {
   const { data, error } = await supabase
     .from('profiles')
     .select('id')
-    .eq('clerk_user_id', userId)
+    .eq('clerk_user_id' as any, userId as any)
     .single();
 
   if (error) {
@@ -134,7 +134,7 @@ export async function getAllProfiles(): Promise<Profile[]> {
     throw new Error(`Erro ao obter perfis: ${error.message}`);
   }
 
-  return profiles || [];
+  return (profiles as unknown as Profile[]) || [];
 }
 
 /**
@@ -151,7 +151,7 @@ export async function getProfileById(profileId: string): Promise<Profile> {
   const { data: profile, error } = await supabase
     .from('profiles')
     .select('*')
-    .eq('id', profileId)
+    .eq('id' as any, profileId as any)
     .single();
 
   if (error) {
@@ -160,11 +160,11 @@ export async function getProfileById(profileId: string): Promise<Profile> {
 
   // Verificar permissões
   const currentProfile = await getProfile();
-  if (currentProfile.role !== 'admin' && profile.clerk_user_id !== userId) {
+  if ((currentProfile as any).role !== 'admin' && (profile as any).clerk_user_id !== userId) {
     throw new Error('Acesso não autorizado');
   }
 
-  return profile;
+  return profile as unknown as Profile;
 }
 
 /**
@@ -181,7 +181,7 @@ export async function deleteProfile(profileId: string): Promise<void> {
   const { error } = await supabase
     .from('profiles')
     .delete()
-    .eq('id', profileId);
+    .eq('id' as any, profileId as any);
 
   if (error) {
     throw new Error(`Erro ao eliminar perfil: ${error.message}`);
@@ -210,7 +210,7 @@ export async function searchProfiles(query: string): Promise<Profile[]> {
     throw new Error(`Erro ao pesquisar perfis: ${error.message}`);
   }
 
-  return profiles || [];
+  return (profiles as unknown as Profile[]) || [];
 }
 
 /**
@@ -229,8 +229,8 @@ export async function updateProfileRole(profileId: string, role: 'basic' | 'admi
     .update({
       role,
       updated_at: new Date().toISOString(),
-    })
-    .eq('id', profileId)
+    } as any)
+    .eq('id' as any, profileId as any)
     .select()
     .single();
 
@@ -238,7 +238,7 @@ export async function updateProfileRole(profileId: string, role: 'basic' | 'admi
     throw new Error(`Erro ao atualizar role: ${error.message}`);
   }
 
-  return profile;
+  return profile as unknown as Profile;
 }
 
 /**
